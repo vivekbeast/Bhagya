@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Signika+Negative:wght@300..700&display=swap');
+
+
+
+
+
+
+
+
+/* 
+.image-box {
+  
+  border-radius: 10%;
+  overflow: visible;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.image-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  border: 3px solid rgb(187, 186, 186);
+  animation: flow 8s infinite ease-in-out;
+  box-shadow: 0 0 20px rgba(205, 204, 204, 0.747);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes flow {
+  0% {
+    border-radius: 10%;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  25% {
+    border-radius: 5% 5% 2% 4% / 0% 6% 4% 0%;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    border-radius: 5% 5% 2% 4% / 0% 6% 4% 0%;
   }
+  75% {
+    border-radius: 5% 5% 2% 4% / 0% 6% 4% 0%;
+  }
+  100% {
+    border-radius: 0%;
+  }
+}  */
+.image-logo {
+  border-radius: 14px 45px 20px 12px;
+  object-fit: contain;
+  position: absolute;
+  border: 3px solid #60ba89;
+  animation: flow 8s infinite ease-in-out;
+  box-shadow: 0 0 10px rgba(26, 38, 21, 0.747);
+}
+.shadow-bottom {
+  position: relative;
+  border: solid rgba(75, 73, 73, 0.2);
+  border-width: 0px 0px 12px 0px;
+  border-radius: 35px;
+  
+}
+
+/* .shadow-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 34px;
+
+  bottom: -8px; 
+  height: 8px;
+  background: rgba(0, 0, 0, 0.2); 
+} */
+/* YourComponent.css */
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  grid-gap: 10px;
+  padding: 1rem;
+  border-radius: 5px 5px 10px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  margin-top: 40px;
+  /* color: #fff; */
+}
+
+.grid-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: black;
+  font-size: 17px;
+  line-height: normal;
+  font-weight: 400;
+  transition: all .1s ease-in-out;
+}
+
+.grid-list li:hover {
+  font-size: 18px;
+  font-weight: 600;
 }
