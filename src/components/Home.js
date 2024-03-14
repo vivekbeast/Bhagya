@@ -3,7 +3,7 @@ import h1 from '../images/7632738.jpg';
 import "../App.css";
 import h2 from '../images/Boys-Indianwear-web_031123.jpg';
 import h3 from '../images/Infant-web_031123.jpg';
-import h4 from '../images/girl-purple-blouse-black-pants-is-sitting-chair-looking-into-camera-holding-folder-against-background-hangers-with-bright-dresses_197531-17617.jpg';
+import h4 from '../images/girlpurple.jpg';
 import h5 from '../images/dancing-team-studio_1303-10928.jpg';
 import post from './post.png';
 import { GrFormNextLink , GrFormPreviousLink } from "react-icons/gr";

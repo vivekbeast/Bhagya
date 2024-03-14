@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCartStore } from '../zustand/store';
 
 const Menu = () => {
