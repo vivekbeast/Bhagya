@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import React from 'react';
 import { Popover, Transition } from '@headlessui/react'
-import { CgProfile } from "react-icons/cg";import { Fragment } from 'react'
+// import { CgProfile } from "react-icons/cg";
+import { Fragment } from 'react';
 import logo from '../images/Bailey.png';
 import { motion } from 'framer-motion';
 import { IoSearchSharp } from "react-icons/io5";
@@ -9,7 +10,7 @@ import { LuMenu } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../zustand/store';
-
+import { useGetUserInfo } from '../hooks/useGetUserInfo';
 
 import '../App.css'
 
@@ -104,21 +105,6 @@ const KidsContent =()=>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default function Header() {
   const [menu, setMenu] = useState();
   // const grandparentRef = useRef(null);
@@ -132,42 +118,45 @@ export default function Header() {
   }));
   const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
 
+  const userInfo = useGetUserInfo();
+  
 
   return (
 <div className="z-10 fixed w-full items-center m-auto px-4 py-4 flex flex-col md:flex-row justify-between shadow-lg   bg-white">
   <div className='logo-container overflow-visible items-center flex justify-between w-full h-[50px]  ml-5 md:w-16 md:h-16 lg:shadow-md lg:shadow-slate-200 rounded-full'>
-  <div className=' flex items-center overflow-visible'> <Link to='/' className=' gap-[2px] flex flex-row items-center'><img src={logo} alt="logo" className='logo-image h-[55px] w-[55px] lg:h-16 lg:w-16 md:h-16 md:w-16 drop-shadow-md shadow-slate-300 rounded-full' />
+  <div className=' flex items-center overflow-visible'> <Link to='/' className=' gap-[2px] flex flex-row items-center'><img src={logo} alt="logo" className='logo-image h-[55px] w-[55px] lg:h-16 lg:w-[100%] md:h-16 md:w-16 drop-shadow-md shadow-slate-300 rounded-full' />
   <h1  className=' lg:hidden md:hidden text-[20px] font-semibold' style={{ fontFamily: 'Signika Negative' }}>hagya</h1></Link></div>
   <span onClick={handleclick} className='main-menu items-center flex mr-5 lg:hidden md:hidden relative'>
-          <LuMenu className='lg:hidden md:hidden fixed  text-[35px]' />
-          <div className='mr-[28px] relative bottom-7 h-full overflow-visible rounded  text-white'>
-            <h1 className='absolute text-[20px] -right-4 p-[2px] rounded-md bg-green-500'>{totalQuantity}</h1>
-          </div>
+          <LuMenu className='lg:hidden md:hidden cursor-pointer text-[35px]' />
+          
         </span></div> 
 {menu && (
-  <div className="hello md:hidden lg:hidden h-[70vh] self-center mt-[20%] items-center flex flex-col">
+  <div className="hello md:hidden lg:hidden h-[60vh] self-center mt-[20%]  items-center flex flex-col">
     <div className="text-center justify-center flex h-fit w-full items-center transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-{#cffde0}-500/50 p-4 md:w-1/2 lg:w-1/3">
       <motion.div
-        className="justify-between flex flex-col h-full"
+        className=" justify-center flex flex-col h-full text-center items-center"
         initial={{ x: 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: 0, opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <p className="text-[20px] font-medium text-gray-900 mt-[10%] hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' }}>
-          Login/SignUp(Work in Progress)
-        </p>
-        <Link to='/trackertomenu' className="text-[20px] font-medium gap-[2px] items-center flex self-center mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' }}>
-          <p className=' absolute z-10'>Cart</p><div className=' bg-green-500 bottom-3 left-8 relative text-white pr-2 pl-2 pt-1 pb-1 rounded-full text-[15px] h-fit'>{totalQuantity}</div><div className=' left-[40px] relative'>(Work is Done)</div>
-        </Link>
-        <p className="text-[20px] font-medium text-gray-900 mt-[10%] hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' }}>
-          Wishlist(Work in Progress)
-        </p>
-        <Link to='/' className="text-[20px] flex self-center font-medium mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' }}>
-          <p>Contact</p>(Work in Progress)
-        </Link>
-        <Link to='/' className="text-[20px] font-medium mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' }}>
+        
+        <Link to='/' className="text-[20px] font-medium mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 text-center self-center  hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative', transition: 'color 0.3s, font-size 0.3s' }}>
           <p>Home</p>
+        </Link>
+        <Link to='/trackertomenu' className="text-[20px] font-medium gap-[2px] items-center flex self-center mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' , transition: 'color 0.3s, font-size 0.3s'}}>
+          <p className=' absolute z-10'>Cart</p><div className=' bg-green-500 bottom-3 left-8 relative text-white pr-2 pl-2 pt-1 pb-1 rounded-full text-[15px] h-fit'>{totalQuantity}</div>
+        </Link>
+        <Link to='/#bottom' onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+        <p className="text-[20px] font-medium text-gray-900 mt-[10%] hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' , transition: 'color 0.3s, font-size 0.3s'}}>
+          About Us
+        </p>
+        </Link>
+        <Link to='/' className="text-[20px] flex self-center font-medium mt-[10%] text-gray-900 hover:text-[25px] hover:text-green-500 hover:transition hover:ease-in-out mb-4" style={{ fontFamily: 'Signika Negative' , transition: 'color 0.3s, font-size 0.3s'}}>
+          <p>Contact</p>
+        </Link>
+        <Link to='/trackertosignup' className="text-[20px] font-medium gap-[2px] items-center flex self-center mt-[10%] text-gray-900 hover:text-[25px]  hover:text-green-500 hover:transition hover:ease-in-out mb-4"  style={{ fontFamily: 'Signika Negative', transition: 'color 0.3s, font-size 0.3s' }}>
+        <p className=''>Signup/Login</p>
         </Link>
       </motion.div>
     </div>
@@ -222,11 +211,16 @@ export default function Header() {
                 group inline-flex text-center  items-center rounded-md bg-[#68c893] px-3 py-2 text-base font-medium hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}
             >
               <span className=' text-white font-semibold items-center' style={{ fontFamily: 'Signika Negative' }}> Profile</span>
-              <CgProfile
+              {/* <CgProfile
                 className={`${open ? 'text-white' : 'text-white'}
                   ml-2 h-5 w-5 transition duration-150 ease-in-out group-hover:text-green-300/80`}
                 aria-hidden="true"
-              />
+              /> */}
+              
+                      <img className={`${open ? 'text-white' : 'text-white'}
+                  ml-2 h-[25px] w-[25px] transition rounded-full duration-150 ease-in-out group-hover:text-green-300/80`} src={userInfo.profilePhoto} alt="" 
+                  />
+                 
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -249,22 +243,27 @@ export default function Header() {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        
-                        
-                        
-                        
+                       
                         >
-                          <p className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' }}>
-                          Login/SignUp
-                          </p>
+<Link to='/' className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative', transition: 'color 0.3s, font-size 0.3s' }}>
+          <p>Home</p>
+        </Link>
+
+                          
                           <p className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' }}>
                           <Link to='/trackertomenu' >Cart</Link>
                           </p>
-                          <p className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' }}>
-                          Wishlist
-                          </p>
-                          <p className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' }}>
-                          Contact
+                         
+        <Link to='/' className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' , transition: 'color 0.3s, font-size 0.3s'}}>
+          <p>Contact</p>
+        </Link>
+        <Link to='/#bottom' onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+        <p className="text-md font-medium text-gray-900 p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' , transition: 'color 0.3s, font-size 0.3s'}}>
+          About Us
+        </p>
+        </Link>
+        <p className="text-md font-medium text-gray-900 cursor-pointer p-3 hover:text-[15px] hover:text-green-500 hover:transition hover:ease-in-out" style={{ fontFamily: 'Signika Negative' }}>
+                          <Link to='/trackertosignup'>Login/SignUp</Link>
                           </p>
                           
                         
@@ -296,6 +295,18 @@ export default function Header() {
           </>
         )}
       </Popover></div>
+      {/* <div className='relative'>
+            <CgShoppingCart className='h-8 w-8 text-black' />
+
+            <motion.div
+                className='absolute -top-1 right-0 p-2 rounded-full bg-green-500'
+                initial={{ y: -10, scale: 0 }} // Initial position and scale
+                animate={{ y: 0, scale: 1 }} // Animation to drop down and scale up
+                transition={{ type: 'spring', stiffness: 200, damping: 20 }} // Spring animation
+            >
+                <h1 className='text-xs text-white'>{totalQuantity}</h1>
+            </motion.div>
+        </div> */}
     </div>
   )
 }

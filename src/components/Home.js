@@ -13,6 +13,10 @@ import plane from '../images/plane.json'
 import { useRef } from "react";
 import Carousel from './Carousel';
 import ProductCart from './ProductCart';
+import { useGetUserInfo } from '../hooks/useGetUserInfo';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from './authentication';
+import { useCartStore } from '../zustand/store';
 
 
 
@@ -36,6 +40,42 @@ const images = [h1, h2, h3, h4, h5];
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const ref = useRef(null);
+  const {
+    cart,
+  } = useCartStore((state) => ({
+    cart: state.cart,
+  }));
+  const bottomRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (bottomRef.current) {
+  //     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  //   else{
+  //     console.log("Nothing")
+  //   }
+  // }, []);
+
+  const userInfo = useGetUserInfo();
+
+  useEffect(() => {
+    const updateCartInFirestore = async () => {
+      try {
+        if (userInfo.userId) {
+          const userRef = doc(db, "users", userInfo.userId);
+          await setDoc(userRef, { cart });
+        }
+      } catch (error) {
+        console.error('Error updating user cart:', error);
+      }
+    };
+    updateCartInFirestore();
+  }, [cart, userInfo.userId]);
+
+
+
+
+
 
   const handleNextButtonClick = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1)% images.length);
@@ -73,12 +113,13 @@ ref.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
   return (
     <div className=' w-full'>
       <div className='flex h-screen md:pt-[110px] lg:pt-[110px] pt-[90px]'>
-      <button className=' h-fit self-center lg:flex md:flex hidden' onClick={handlePrevButtonClick}><GrFormPreviousLink className=' h-[30px] w-[25px]' /></button>
+      <button className=' h-fit self-center lg:flex md:flex hidden' onClick={handlePrevButtonClick}>
+        <GrFormPreviousLink className=' h-[30px] w-[25px]' /></button>
       <div className=' flex flex-col w-full h-fit rounded-md text-center' style={{ overflow: 'hidden' }}>
       <motion.img
             key={currentImageIndex}
             initial={{ x: 700 }}
-            animate={{ x: 0, transition: { type: 'easeInOut', duration: 0.3, stiffness: 300, damping: 10 } }}
+            animate={{ x: 0, transition: { type: 'easeInOut', duration: 0.5, stiffness: 300, damping: 10 } }}
             exit={{ x: -700 }}
             className='md:h-[500px] lg:h-[500px] h-[290px] w-[95%] rounded-md shadow-2xl self-center'
             src={images[currentImageIndex]}
@@ -110,6 +151,9 @@ ref.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
       <Carousel />
       </div>
       <ProductCart />
+      <div  ref={bottomRef}>
+tjrbytrvyrytrytr
+      </div>
     </div>
   );
 };

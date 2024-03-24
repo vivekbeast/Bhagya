@@ -60,6 +60,24 @@
   border-radius: 35px;
   
 }
+.popup {
+  animation: popupAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes popupAnimation {
+  0% {
+      transform: scale(0);
+      opacity: 0;
+  }
+  50% {
+      transform: scale(1.2);
+      opacity: 1;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
 
 /* .shadow-bottom::after {
   content: "";
