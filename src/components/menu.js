@@ -2,21 +2,19 @@ import React, { useEffect } from 'react';
 import { useCartStore } from '../zustand/store';
 import { db } from './authentication';
 import { useGetUserInfo } from '../hooks/useGetUserInfo';
-import { collection, updateDoc, doc, setDoc, getDocs } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore"; 
 
 
 
 const Menu = () => {
   const {
     cart,
-    setCart,
     removeFromCart,
     clearCart,
     increaseQuantity,
     decreaseQuantity
   } = useCartStore((state) => ({
     cart: state.cart,
-    setCart: state.setCart,
     removeFromCart: state.removeFromCart,
     clearCart: state.clearCart,
     increaseQuantity: state.increaseQuantity,

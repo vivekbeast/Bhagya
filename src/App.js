@@ -8,14 +8,12 @@ import { motion } from 'framer-motion';
 import { useCartStore } from './zustand/store';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import { useGetUserInfo } from './hooks/useGetUserInfo';
 function App() {
   const { cart } = useCartStore(state => ({
     cart: state.cart,
   }));
   const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
 
-  const userInfo = useGetUserInfo();
   return (
     <BrowserRouter>
       <div className="h-fit relative">
